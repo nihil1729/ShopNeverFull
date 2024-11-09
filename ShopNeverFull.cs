@@ -9,20 +9,6 @@ namespace ShopNeverFull
 {
     public class ShopNeverFull : Mod
     {
-        // private Mod _calamityMod;
-        // public ModItem FabStaff;
-
-        // public override void PostSetupContent()
-        // {
-        //     if (ModLoader.TryGetMod("CalamityMod", out _calamityMod))
-        //     {
-        //         // 获取绝学法杖
-        //         if (_calamityMod.TryFind("Fabstaff", out FabStaff))
-        //         {
-        //         }
-        //     }
-        // }
-
         public override void Load()
         {
             On_Chest.SetupShop_string_NPC += On_ChestOnSetupShop_string_NPC;
@@ -33,7 +19,7 @@ namespace ShopNeverFull
             On_Chest.SetupShop_string_NPC -= On_ChestOnSetupShop_string_NPC;
         }
 
-        private void On_ChestOnSetupShop_string_NPC(On_Chest.orig_SetupShop_string_NPC orig, Chest self,
+        private static void On_ChestOnSetupShop_string_NPC(On_Chest.orig_SetupShop_string_NPC orig, Chest self,
             string shopName, NPC npc)
         {
             var itemList = new List<Item>();
@@ -43,10 +29,7 @@ namespace ShopNeverFull
 
             if (NPCShopDatabase.TryGetNPCShop(shopName, out var shop))
             {
-                if (!systemInstance.ShopIndexDict.ContainsKey(shopName))
-                {
-                    systemInstance.ShopIndexDict.Add(shopName, null);
-                }
+                systemInstance.ShopIndexDict.TryAdd(shopName, null);
 
                 shop.FillShop(itemList, npc);
             }
@@ -62,11 +45,11 @@ namespace ShopNeverFull
                 systemInstance.ShowUi();
             }
 
-            ShopPageContext shopPageContext = new ShopPageContext()
+            var shopPageContext = new ShopPageContext()
             {
                 AllItems = itemList,
                 SelfChest = self,
-                NPC = npc,
+                Npc = npc,
                 ShopName = shopName
             };
 
@@ -78,7 +61,7 @@ namespace ShopNeverFull
                 { 0, -1 }, { 1, 1 }
             };
 
-            for (int i = 0; i < events.Length; ++i)
+            for (var i = 0; i < events.Length; ++i)
             {
                 var offset = offsetDict[i];
                 events[i] += delegate
@@ -104,19 +87,18 @@ namespace ShopNeverFull
         {
             public List<Item> AllItems;
             public Chest SelfChest;
-            public NPC NPC;
+            public NPC Npc;
             public string ShopName;
             public int? CurPageIndex;
             public int TotalPages => (int)Math.Ceiling((double)AllItems.Count / (Chest.maxItems - 1));
         }
 
-        private void SetShopPage(ShopPageContext ctx)
+        private static void SetShopPage(ShopPageContext ctx)
         {
             var allItems = ctx.AllItems;
             var chest = ctx.SelfChest;
-            var npc = ctx.NPC;
+            var npc = ctx.Npc;
             var shopName = ctx.ShopName;
-            var totalPages = ctx.TotalPages;
 
             var curPageIndex = ctx.CurPageIndex ??= 0;
 

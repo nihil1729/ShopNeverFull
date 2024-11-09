@@ -5,11 +5,10 @@ using Terraria.UI;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
-using System.Collections;
 
 namespace ShopNeverFull.Common.UI
 {
-    class ShopExpandUiPanel : UIPanel
+    internal class ShopExpandUiPanel : UIPanel
     {
         private UIButton<string> _prevButton;
         private UIButton<string> _nextButton;
@@ -53,7 +52,7 @@ namespace ShopNeverFull.Common.UI
         }
     }
 
-    class ShopExpandUiState : UIState
+    internal class ShopExpandUiState : UIState
     {
         private ShopExpandUiPanel _panel;
 
@@ -81,7 +80,7 @@ namespace ShopNeverFull.Common.UI
     {
         private UserInterface _customInterface;
         private ShopExpandUiState _customUiState;
-        internal Dictionary<string, int?> ShopIndexDict = new Dictionary<string, int?>();
+        internal readonly Dictionary<string, int?> ShopIndexDict = new Dictionary<string, int?>();
         private GameTime _lastUpdateUiGameTime;
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -99,6 +98,7 @@ namespace ShopNeverFull.Common.UI
                             {
                                 _customInterface.Draw(Main.spriteBatch, _lastUpdateUiGameTime);
                             }
+
                             return true;
                         },
                         InterfaceScaleType.UI

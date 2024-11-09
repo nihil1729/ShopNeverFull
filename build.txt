@@ -1,0 +1,5 @@
+displayName = 商店不会满
+author = nihil1729
+version = 0.0.0
+weakReferences = CalamityMod
+sortAfter = CalamityMod

@@ -1,0 +1,8 @@
+# Rider
+.idea/
+
+# Visual Studio
+.vs/
+obj/
+bin/
+ShopNeverFull.sln.DotSettings.user

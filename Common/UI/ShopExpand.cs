@@ -5,6 +5,7 @@ using Terraria.UI;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
+using System.Collections;
 
 namespace ShopNeverFull.Common.UI
 {
@@ -80,7 +81,7 @@ namespace ShopNeverFull.Common.UI
     {
         private UserInterface _customInterface;
         private ShopExpandUiState _customUiState;
-        internal int? CurIndex;
+        internal Dictionary<string, int?> ShopIndexDict = new Dictionary<string, int?>();
         private GameTime _lastUpdateUiGameTime;
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

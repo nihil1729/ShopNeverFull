@@ -1,83 +1,83 @@
 Configs: {
 	ShopUIConfig: {
-		DisplayName: Shop UI Config
+		DisplayName: 界面配置
 
 		Transparent: {
-			Label: Background Transparent
+			Label: 背景透明
 			Tooltip: ""
 		}
 
 		BackgroundUIElement: {
-			Label: Background UI Element
-			Tooltip: ""
+			Label: 背景组件
+			// Tooltip: ""
 		}
 
 		PrevButton: {
-			Label: Prev Button
-			Tooltip: ""
+			Label: 上一页按钮
+			// Tooltip: ""
 		}
 
 		NextButton: {
-			Label: Next Button
-			Tooltip: ""
+			Label: 下一页按钮
+			// Tooltip: ""
 		}
 
 		BackgroundUIConfig: {
 			Label: Background UI Config
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		PrevButtonConfig: {
 			Label: Prev Button Config
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		NextButtonConfig: {
 			Label: Next Button Config
-			Tooltip: ""
+			// Tooltip: ""
 		}
 	}
 
 	BackgroundPanelConfig: {
-		Tooltip: ""
+		// Tooltip: ""
 
 		Width: {
 			Label: Width
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		Height: {
 			Label: Height
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		Left: {
 			Label: Left
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		Top: {
 			Label: Top
-			Tooltip: ""
+			// Tooltip: ""
 		}
 	}
 
 	ToggleButtonConfig: {
-		Tooltip: ""
+		// Tooltip: ""
 
 		Width: {
 			Label: Width
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		Height: {
 			Label: Height
-			Tooltip: ""
+			// Tooltip: ""
 		}
 
 		Left: {
 			Label: Left
-			Tooltip: ""
+			// Tooltip: ""
 		}
 	}
 }

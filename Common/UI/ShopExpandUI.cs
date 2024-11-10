@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Microsoft.Xna.Framework;
+using ShopNeverFull.Common.Configs;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.UI;
 
@@ -10,27 +11,29 @@ namespace ShopNeverFull.Common.UI
 {
     internal class ShopExpandUiPanel : UIPanel
     {
-        private UIButton<string> _prevButton;
-        private UIButton<string> _nextButton;
+        public UIButton<string> PrevButton;
+        public UIButton<string> NextButton;
 
         public override void OnInitialize()
         {
-            _prevButton = new UIButton<string>("<")
+            PrevButton = new UIButton<string>("<")
             {
                 ScalePanel = true,
+                Width = { Pixels = 45 },
                 Height = { Pixels = 45 },
-                HAlign = 0.01f
+                Left = { Pixels = 0 }
             };
 
-            _nextButton = new UIButton<string>(">")
+            NextButton = new UIButton<string>(">")
             {
                 ScalePanel = true,
+                Width = { Pixels = 45 },
                 Height = { Pixels = 45 },
-                HAlign = 0.99f
+                Left = { Pixels = 40 }
             };
 
-            Append(_prevButton);
-            Append(_nextButton);
+            Append(PrevButton);
+            Append(NextButton);
         }
 
         public void SetLeftClick(MouseEvent[] mouseEvents)
@@ -45,18 +48,20 @@ namespace ShopNeverFull.Common.UI
                 return;
             }
 
-            _prevButton.OnLeftClick += mouseEvents[0];
-            _nextButton.OnLeftClick += mouseEvents[1];
+            PrevButton.OnLeftClick += mouseEvents[0];
+            NextButton.OnLeftClick += mouseEvents[1];
         }
     }
 
     internal class ShopExpandUiState : UIState
     {
         private ShopExpandUiPanel _panel;
+        private readonly Color _defaultBackgroundColor = new Color(63, 82, 151) * 0.7f;
+        private readonly Color _defaultBorderColor = Color.Black;
 
         public override void OnInitialize()
         {
-            _panel = new ShopExpandUiPanel()
+            _panel = new ShopExpandUiPanel
             {
                 Width = { Pixels = 100 },
                 Height = { Pixels = 60 },
@@ -65,6 +70,41 @@ namespace ShopNeverFull.Common.UI
             };
 
             Append(_panel);
+        }
+
+        public void SetPanelTransparent(bool transparent)
+        {
+            if (transparent)
+            {
+                _panel.BackgroundColor = Color.Transparent;
+                _panel.BorderColor = Color.Transparent;
+            }
+            else
+            {
+                _panel.BackgroundColor = _defaultBackgroundColor;
+                _panel.BorderColor = _defaultBorderColor;
+            }
+        }
+
+        public void SetBackgroundConfig(BackgroundPanelConfig config)
+        {
+            _panel.Left.Pixels = config.Left;
+            _panel.Top.Pixels = config.Top;
+            _panel.Width.Pixels = config.Width;
+            _panel.Height.Pixels = config.Height;
+        }
+
+        public void SetToggleButtonConfig(ToggleButtonConfig config, bool prev = true)
+        {
+            var button = _panel.NextButton;
+            if (prev)
+            {
+                button = _panel.PrevButton;
+            }
+
+            button.Left.Pixels = config.Left;
+            button.Width.Pixels = config.Width;
+            button.Height.Pixels = config.Height;
         }
 
         public void SetLeftClick(MouseEvent[] mouseEvents)
@@ -107,6 +147,12 @@ namespace ShopNeverFull.Common.UI
 
         public void ShowUI()
         {
+            var configInstance = ModContent.GetInstance<ShopUIConfig>();
+            _customUiState.SetPanelTransparent(configInstance.Transparent);
+            _customUiState.SetBackgroundConfig(configInstance.BackgroundUIConfig);
+            _customUiState.SetToggleButtonConfig(configInstance.PrevButtonConfig);
+            _customUiState.SetToggleButtonConfig(configInstance.NextButtonConfig, false);
+
             _customInterface?.SetState(_customUiState);
         }
 

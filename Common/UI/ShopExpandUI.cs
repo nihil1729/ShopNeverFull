@@ -18,17 +18,15 @@ namespace ShopNeverFull.Common.UI
             _prevButton = new UIButton<string>("<")
             {
                 ScalePanel = true,
-                Height = { Pixels = 50 },
-                HAlign = 0.1f,
-                VAlign = 0.5f
+                Height = { Pixels = 45 },
+                HAlign = 0.01f
             };
 
             _nextButton = new UIButton<string>(">")
             {
                 ScalePanel = true,
-                Height = { Pixels = 50 },
-                HAlign = 0.9f,
-                VAlign = 0.5f
+                Height = { Pixels = 45 },
+                HAlign = 0.99f
             };
 
             Append(_prevButton);
@@ -60,10 +58,10 @@ namespace ShopNeverFull.Common.UI
         {
             _panel = new ShopExpandUiPanel()
             {
-                Width = { Pixels = 120 },
-                Height = { Pixels = 70 },
+                Width = { Pixels = 100 },
+                Height = { Pixels = 60 },
                 Left = { Pixels = 500 },
-                Top = { Pixels = 355 }
+                Top = { Pixels = 362 }
             };
 
             Append(_panel);
@@ -80,7 +78,7 @@ namespace ShopNeverFull.Common.UI
     {
         private UserInterface _customInterface;
         private ShopExpandUiState _customUiState;
-        internal readonly Dictionary<string, int?> ShopIndexDict = new Dictionary<string, int?>();
+        internal readonly Dictionary<string, int?> ShopIndexDict = new();
         private GameTime _lastUpdateUiGameTime;
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
@@ -107,12 +105,12 @@ namespace ShopNeverFull.Common.UI
             }
         }
 
-        public void ShowUi()
+        public void ShowUI()
         {
             _customInterface?.SetState(_customUiState);
         }
 
-        private void HideUi()
+        private void HideUI()
         {
             _customInterface?.SetState(null);
         }
@@ -140,7 +138,7 @@ namespace ShopNeverFull.Common.UI
 
             if (Main.LocalPlayer.TalkNPC == null)
             {
-                HideUi();
+                HideUI();
             }
         }
 

@@ -2,28 +2,8 @@ Configs: {
 	ShopUIConfig: {
 		DisplayName: Shop UI Config
 
-		Transparent: {
-			Label: Background Transparent
-			Tooltip: ""
-		}
-
-		BackgroundUIElement: {
-			Label: Background UI Element
-			Tooltip: ""
-		}
-
-		PrevButton: {
-			Label: Prev Button
-			Tooltip: ""
-		}
-
-		NextButton: {
-			Label: Next Button
-			Tooltip: ""
-		}
-
-		BackgroundUIConfig: {
-			Label: Background UI Config
+		BackgroundConfig: {
+			Label: Background Config
 			Tooltip: ""
 		}
 
@@ -40,6 +20,11 @@ Configs: {
 
 	BackgroundPanelConfig: {
 		Tooltip: ""
+
+		Transparent: {
+			Label: Transparent
+			Tooltip: ""
+		}
 
 		Width: {
 			Label: Width
@@ -77,6 +62,21 @@ Configs: {
 
 		Left: {
 			Label: Left
+			Tooltip: ""
+		}
+
+		Padding: {
+			Label: Padding
+			Tooltip: ""
+		}
+
+		HAlign: {
+			Label: H Align
+			Tooltip: ""
+		}
+
+		VAlign: {
+			Label: V Align
 			Tooltip: ""
 		}
 	}

@@ -4,61 +4,54 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace ShopNeverFull.Common.GlobalNPCs
+namespace ShopNeverFull.Common.GlobalNPCs;
+
+public sealed class PylonPatchNPC : GlobalNPC
 {
-    public sealed class PylonPatchNPC : GlobalNPC
+    private static List<NPCShop.Entry> _pylonEntries;
+
+    public override void ModifyShop(NPCShop shop)
     {
-        private static List<NPCShop.Entry> _pylonEntries;
+        _pylonEntries ??= NPCShopDatabase.GetPylonEntries().ToList();
+    }
 
-        public override void ModifyShop(NPCShop shop)
+    public override void Unload()
+    {
+        _pylonEntries = null;
+    }
+
+    public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
+    {
+        if (shopName == NPCShopDatabase.GetShopName(NPCID.DD2Bartender))
+            AddPylonsToBartenderShop(npc, items);
+    }
+
+    private static void AddPylonsToBartenderShop(NPC npc, Item[] items)
+    {
+        var slot = 0;
+
+        for (; slot < items.Length; ++slot)
         {
-            _pylonEntries ??= NPCShopDatabase.GetPylonEntries().ToList();
+            if (!items[slot].IsAir) continue;
+
+            break;
         }
 
-        public override void Unload()
+        if (slot == items.Length || slot == Chest.maxItems - 1) return;
+
+        foreach (var entry in _pylonEntries)
         {
-            _pylonEntries = null;
-        }
+            if (entry.Disabled || !entry.ConditionsMet())
+                continue;
 
-        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
-        {
-            if (shopName == NPCShopDatabase.GetShopName(NPCID.DD2Bartender))
-                AddPylonsToBartenderShop(npc, items);
-        }
+            items[slot] = entry.Item.Clone();
+            entry.OnShopOpen(items[slot], npc);
 
-        private static void AddPylonsToBartenderShop(NPC npc, Item[] items)
-        {
-            int slot = 0;
-
-            for (; slot < items.Length; ++slot)
+            do
             {
-                if (!items[slot].IsAir)
-                {
-                    continue;
-                }
-
-                break;
-            }
-
-            if (slot == items.Length || slot == Chest.maxItems - 1)
-            {
-                return;
-            }
-
-            foreach (var entry in _pylonEntries)
-            {
-                if (entry.Disabled || !entry.ConditionsMet())
-                    continue;
-
-                items[slot] = entry.Item.Clone();
-                entry.OnShopOpen(items[slot], npc);
-
-                do
-                {
-                    if (++slot >= items.Length)
-                        return;
-                } while (!items[slot].IsAir);
-            }
+                if (++slot >= items.Length)
+                    return;
+            } while (!items[slot].IsAir);
         }
     }
 }

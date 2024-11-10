@@ -2,38 +2,18 @@ Configs: {
 	ShopUIConfig: {
 		DisplayName: 界面配置
 
-		Transparent: {
-			Label: 背景透明
-			Tooltip: ""
-		}
-
-		BackgroundUIElement: {
-			Label: 背景组件
-			// Tooltip: ""
-		}
-
-		PrevButton: {
-			Label: 上一页按钮
-			// Tooltip: ""
-		}
-
-		NextButton: {
-			Label: 下一页按钮
-			// Tooltip: ""
-		}
-
-		BackgroundUIConfig: {
-			Label: Background UI Config
+		BackgroundConfig: {
+			Label: 背景配置
 			// Tooltip: ""
 		}
 
 		PrevButtonConfig: {
-			Label: Prev Button Config
+			Label: 上一页按钮配置
 			// Tooltip: ""
 		}
 
 		NextButtonConfig: {
-			Label: Next Button Config
+			Label: 下一页按钮配置
 			// Tooltip: ""
 		}
 	}
@@ -41,23 +21,28 @@ Configs: {
 	BackgroundPanelConfig: {
 		// Tooltip: ""
 
+		Transparent: {
+			Label: 透明
+			// Tooltip: ""
+		}
+
 		Width: {
-			Label: Width
+			Label: 宽度
 			// Tooltip: ""
 		}
 
 		Height: {
-			Label: Height
+			Label: 高度
 			// Tooltip: ""
 		}
 
 		Left: {
-			Label: Left
+			Label: 左
 			// Tooltip: ""
 		}
 
 		Top: {
-			Label: Top
+			Label: 上
 			// Tooltip: ""
 		}
 	}
@@ -66,17 +51,32 @@ Configs: {
 		// Tooltip: ""
 
 		Width: {
-			Label: Width
+			Label: 宽度
 			// Tooltip: ""
 		}
 
 		Height: {
-			Label: Height
+			Label: 高度
 			// Tooltip: ""
 		}
 
 		Left: {
-			Label: Left
+			Label: 左
+			// Tooltip: ""
+		}
+
+		Padding: {
+			Label: 内边距
+			// Tooltip: ""
+		}
+
+		HAlign: {
+			Label: 水平对齐
+			// Tooltip: ""
+		}
+
+		VAlign: {
+			Label: 垂直对齐
 			// Tooltip: ""
 		}
 	}
